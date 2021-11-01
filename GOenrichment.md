@@ -104,7 +104,7 @@ Finish the gene lengths:
 ```bash
 module load Miniconda3
 conda create -n env_goseq #create the environment for goseq
-conda activate goseq
+conda activate goseq #
 conda install -c bioconda bioconductor-goseq 
 
  module load R/3.4.2-gimkl-2017a
@@ -118,9 +118,16 @@ biocLite("qvalue") # that on
 biocLite("goseq")  
 ```
 
+In the future, one need to activate the environment if you re-run the go analysis. If starting a new session, run the following only:
+
+```
+module load Miniconda3
+conda activate goseq 
+```
+
 ## Run the GO analysis:
 (done by Mitra)
-https://github.com/trinityrnaseq/trinityrnaseq/wiki/Running-GOSeq
+Commands information in the original tutorial : https://github.com/trinityrnaseq/trinityrnaseq/wiki/Running-GOSeq
 
 ```bash
 /opt/nesi/CS400_centos7_bdw/Trinity/2.8.5-gimkl-2018b/trinityrnaseq-Trinity-v2.8.5/Analysis/DifferentialExpression/run_GOseq.pl \
@@ -134,6 +141,4 @@ mv diff.GOseq.enriched allDE.GOseq.enriched
 
 
 
-
-```
 
