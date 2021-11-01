@@ -34,7 +34,7 @@ isoforms.TMM.EXPR.matrix  is then created using counts generated using salmon an
 
 
 ```
-
+module load Salmon/0.14.0-gimkl-2018b # version matters!
 /opt/nesi/CS400_centos7_bdw/Trinity/2.8.5-gimkl-2018b/trinityrnaseq-Trinity-v2.8.5/util/align_and_estimate_abundance.pl \
 --transcripts FR_trinity_output/Trinity.fasta \
 --seqType fq \
