@@ -119,7 +119,7 @@ biocLite("goseq")
 ```
 
 ## Run the GO analysis:
-
+(done by Mitra)
 https://github.com/trinityrnaseq/trinityrnaseq/wiki/Running-GOSeq
 
 ```bash
@@ -136,14 +136,4 @@ mv diff.GOseq.enriched allDE.GOseq.enriched
 
 
 ```
-**down regulated
-```bash
-cat ~/repos/scripts/eelRNA/downregulated.txt |  awk '{print "diff\t",$0}'    >factor_labelingdownregulated.txt
-/opt/nesi/CS400_centos7_bdw/Trinity/2.8.5-gimkl-2018b/trinityrnaseq-Trinity-v2.8.5/Analysis/DifferentialExpression/run_GOseq.pl \
-                       --factor_labeling  factor_labelingdownregulated.txt \
-                       --GO_assignments go_annotations.txt \
-                       --lengths Trinity.gene_lengths.txt \
-                       --background  backgroundGO.txt                       
-mv diff.GOseq.depleted  ~/repos/scripts/eelRNA/results_files/logFClowerthan0_diff.GOseq.depleted 
-mv diff.GOseq.enriched  ~/repos/scripts/eelRNA/results_files/logFClowerthan0_diff.GOseq.enriched
-```
+
