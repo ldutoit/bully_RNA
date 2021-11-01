@@ -89,31 +89,28 @@ Finish the gene lengths:
 
 ```
 /opt/nesi/CS400_centos7_bdw/Trinity/2.8.5-gimkl-2018b/trinityrnaseq-Trinity-v2.8.5/util/misc/TPM_weighted_gene_length.py  \
-         --gene_trans_map FR_trinity_output/Trinity.fasta.gene_trans_map \
-         --trans_lengths FR_trinity_output/Trinity.fasta.seq_lens \
+         --gene_trans_map Trinity.fasta.gene_trans_map \
+         --trans_lengths Trinity.fasta.seq_lens \
          --TPM_matrix Trinity_trans.isoform.TMM.EXPR.matrix >Trinity.gene_lengths.txt
 ```
 
-#I create the factor labelling out of the DE analysis genes in the github repos:
 
-```
- cut -f 2  ~/repos/scripts/eelRNA/results_files/DE_results.txt  | tail -n 10348  |  awk '{print "diff\t",$0}' | sed -s 's/\"//g'    >factor_labeling.txt
-```
 
- NOTE 10348 because that is the number of DE genes, there is 10349 lines with a header 
-
-##Install GOSeq dependencies ( not covered in tutorial)
+## Install GOSeq dependencies ( not covered in tutorial)
 
 
  I installed goseq using conda inside the transdecoder conda environment:
 
 ```bash
- conda install -c bioconda bioconductor-goseq 
+module load Miniconda3
+conda create -n env_goseq #create the environment for goseq
+conda activate goseq
+conda install -c bioconda bioconductor-goseq 
 
  module load R/3.4.2-gimkl-2017a
 ```
 
-Then I installed qvalue inside R using:
+Then I install qvalue inside R using:
 
 ```r
 source("http://bioconductor.org/biocLite.R")
@@ -123,28 +120,20 @@ biocLite("goseq")
 
 ## Run the GO analysis:
 
+https://github.com/trinityrnaseq/trinityrnaseq/wiki/Running-GOSeq
+
 ```bash
 /opt/nesi/CS400_centos7_bdw/Trinity/2.8.5-gimkl-2018b/trinityrnaseq-Trinity-v2.8.5/Analysis/DifferentialExpression/run_GOseq.pl \
                        --factor_labeling  factor_labeling.txt \
                        --GO_assignments go_annotations.txt \
                        --lengths Trinity.gene_lengths.txt \
                        --background  backgroundGO.txt
-mv diff.GOseq.depleted  ~/repos/scripts/eelRNA/results_files/allDE.GOseq.depleted 
-mv diff.GOseq.enriched  ~/repos/scripts/eelRNA/results_files/allDE.GOseq.enriched                 
+mv diff.GOseq.depleted  allDE.GOseq.depleted 
+mv diff.GOseq.enriched allDE.GOseq.enriched                 
 ```
 
-I save those files in this repository as [results_files/diff.GOseq.depleted](results_files/diff.GOseq.depleted) and [results_files/diff.GOseq.enriched](results_files/diff.GOseq.enriched)
 
-**Upregulated only**
-```bash
-cat ~/repos/scripts/eelRNA/upregulated.txt |  awk '{print "diff\t",$0}'    >factor_labelingupregulated.txt
-/opt/nesi/CS400_centos7_bdw/Trinity/2.8.5-gimkl-2018b/trinityrnaseq-Trinity-v2.8.5/Analysis/DifferentialExpression/run_GOseq.pl \
-                       --factor_labeling  factor_labelingupregulated.txt \
-                       --GO_assignments go_annotations.txt \
-                       --lengths Trinity.gene_lengths.txt \
-                       --background  backgroundGO.txt
-mv diff.GOseq.depleted  ~/repos/scripts/eelRNA/results_files/logFCbiggerthan0_diff.GOseq.depleted 
-mv diff.GOseq.enriched  ~/repos/scripts/eelRNA/results_files/logFCbiggerthan0_diff.GOseq.enriched
+
 
 ```
 **down regulated
