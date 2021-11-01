@@ -30,11 +30,12 @@ extract gene lengths to be able to account for gene length in GOseq annotation.
 ```
 
 
-isoforms.TMM.EXPR.matrix  is then created using counts generated using salmon and the script:
+isoforms.TMM.EXPR.matrix  is then created using counts generated using salmon and the script below. 
 
 
 ```
 module load Salmon/0.14.0-gimkl-2018b # version matters!
+module load R # EdgeR need to be installed!
 /opt/nesi/CS400_centos7_bdw/Trinity/2.8.5-gimkl-2018b/trinityrnaseq-Trinity-v2.8.5/util/align_and_estimate_abundance.pl \
 --transcripts FR_trinity_output/Trinity.fasta \
 --seqType fq \
@@ -50,18 +51,38 @@ module load Salmon/0.14.0-gimkl-2018b # version matters!
 --out_prefix Trinity_trans \
 --name_sample_by_basedir \
 --gene_trans_map none \
-silver_rep1/quant.sf \
-silver_rep2/quant.sf \
-silver_rep3/quant.sf \
-silver_rep4/quant.sf \
-silver_rep5/quant.sf \
-silver_rep6/quant.sf \
-yellow_rep1/quant.sf \
-yellow_rep2/quant.sf \
-yellow_rep3/quant.sf \
-yellow_rep4/quant.sf \
-yellow_rep5/quant.sf \
-yellow_rep6/quant.sf 
+CB_FW_01_Hayes/quant.sf \
+CB_FW_01_Otokia/quant.sf \
+CB_FW_01_Waiko/quant.sf \
+CB_FW_01_Wanaka/quant.sf \
+CB_FW_02_Hayes/quant.sf \
+CB_FW_02_Otokia/quant.sf \
+CB_FW_03_Hayes/quant.sf \
+CB_FW_03_Otokia/quant.sf \
+CB_FW_03_Waiko/quant.sf \
+CB_FW_03_Wanaka/quant.sf \
+CB_FW_04_Otokia/quant.sf \
+CB_FW_04_Waiko/quant.sf \
+CB_FW_04_Wanaka/quant.sf \
+CB_FW_05_Hayes/quant.sf \
+CB_FW_05_Waiko/quant.sf \
+CB_FW_05_Wanaka/quant.sf \
+CB_SW_01_Hayes/quant.sf \
+CB_SW_01_Otokia/quant.sf \
+CB_SW_01_Waiko/quant.sf \
+CB_SW_01_Wanaka/quant.sf \
+CB_SW_02_Hayes/quant.sf \
+CB_SW_02_Otokia/quant.sf \
+CB_SW_02_Waiko/quant.sf \
+CB_SW_03_Hayes/quant.sf \
+CB_SW_03_Otokia/quant.sf \
+CB_SW_03_Waiko/quant.sf \
+CB_SW_03_Wanaka/quant.sf \
+CB_SW_04_Wanaka/quant.sf \
+CB_SW_05_Hayes/quant.sf \
+CB_SW_05_Otokia/quant.sf \
+CB_SW_05_Waiko/quant.sf \
+CB_SW_05_Wanaka/quant.sf 
 ```
 
 Finish the gene lengths:
